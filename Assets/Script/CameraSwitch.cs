@@ -12,9 +12,10 @@ public class CameraSwitch : MonoBehaviour {
     public GameObject PlayerTwo;
     public GameObject PlayerThree;
 
-    private PlayerMove playerTurn;
+    
     private NPCMove npc1Turn;
     private NPCMove npc2Turn;
+    private PlayerMove npc3Turn;
 
     AudioListener CameraPlayerOneAudioLis;
     AudioListener CameraPlayerTwoAudioLis;
@@ -36,9 +37,10 @@ public class CameraSwitch : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        playerTurn = PlayerThree.GetComponent<PlayerMove>();
+        
         npc1Turn = PlayerOne.GetComponent<NPCMove>();
         npc2Turn = PlayerTwo.GetComponent<NPCMove>();
+        npc3Turn = PlayerThree.GetComponent<PlayerMove>();
         //Change Camera Keyboard
         switchCamera();
     }
@@ -56,7 +58,7 @@ public class CameraSwitch : MonoBehaviour {
             cameraChangeCounter(2);
         }
 
-        if(playerTurn.turn)
+        if(npc3Turn.turn)
         {
             cameraChangeCounter(3);
         }
@@ -75,7 +77,6 @@ public class CameraSwitch : MonoBehaviour {
     //Camera change Logic
     void cameraPositionChange(int camPosition)
     {
-        Debug.Log("Nach demübergeben: " +  camPosition);
         switch (camPosition)
         {
             case 0:
@@ -90,7 +91,6 @@ public class CameraSwitch : MonoBehaviour {
                     CameraPlayerThree.SetActive(false);
                     break;
             case 1:
-                    Debug.Log("NPC 1");
                     CameraPlayerOne.SetActive(true);
                     CameraPlayerOneAudioLis.enabled = true;
 
@@ -101,7 +101,6 @@ public class CameraSwitch : MonoBehaviour {
                     CameraPlayerThree.SetActive(false);
                     break;
             case 2:
-                    Debug.Log("NPC 2");
                     CameraPlayerTwo.SetActive(true);
                     CameraPlayerTwoAudioLis.enabled = true;
 
@@ -112,8 +111,6 @@ public class CameraSwitch : MonoBehaviour {
                     CameraPlayerThree.SetActive(false);  
                     break;  
             case 3:
-                    Debug.Log("Spieler");
-
                     CameraPlayerThreeAudioLis.enabled = true;
                     CameraPlayerThree.SetActive(true);
 
